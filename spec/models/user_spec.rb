@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe User, :type => :model do
 	it "is valid with a name and email" do
@@ -28,8 +28,8 @@ RSpec.describe User, :type => :model do
 		end		
 
 		it "validates uniqueness" do
-			user_1 = Fabricate(:user)
-			user_2 = Fabricate(:user)
+			user_1 = Fabricate(:user, id: 1)
+			user_2 = Fabricate(:user, id: 2)
 			user_2.email = user_1.email
 			expect(user_2).to be_invalid
 		end
@@ -51,8 +51,8 @@ RSpec.describe User, :type => :model do
     end
 
     it "is case insensitive" do
-    	user_1 = Fabricate(:user)
-    	user_2 = Fabricate(:user)
+    	user_1 = Fabricate(:user, id: 1)
+    	user_2 = Fabricate(:user, id: 2)
     	user_2.email = user_1.email.upcase
     	expect(user_2).to be_invalid
     end
