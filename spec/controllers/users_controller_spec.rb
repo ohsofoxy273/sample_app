@@ -31,6 +31,12 @@ RSpec.describe UsersController, :type => :controller do
         expect(User.count).to eq(1)
       end
 
+      it "logs in the user" do
+        alice = Fabricate.attributes_for(:user)
+        post :create, user: alice
+        expect(session[:user_id]).to eq(1)
+      end
+
       it "shows the flash" do
         alice = Fabricate.attributes_for(:user)
         post :create, user: alice
@@ -65,4 +71,5 @@ RSpec.describe UsersController, :type => :controller do
       end
     end 
   end
+
 end
