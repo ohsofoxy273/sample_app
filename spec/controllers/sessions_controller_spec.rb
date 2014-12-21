@@ -12,7 +12,6 @@ describe SessionsController do
   describe 'POST create' do
   	context "with valid session information" do 
  
-
 	  	it "logs in the user" do
 	  		alice = Fabricate(:user)
 	  		post :create, {session: {email: alice.email, password: alice.password}}

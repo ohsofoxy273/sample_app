@@ -65,4 +65,21 @@ RSpec.describe User, :type => :model do
 			expect(user).to be_invalid
 		end
 	end
+
+	describe "#remember" do
+		it "Remembers a user in the database for use in persistent sessions 
+				by updating 'remember_digest' in the database with a 60 char token" do
+			alice = Fabricate(:user)
+			alice.remember
+			expect(alice.remember_digest.length).to eq(60)
+		end
+	end
+
+	describe "#authenticated?" do
+		it "return false for a user with nil digest" do
+			alice = Fabricate(:user)
+			expect(alice.authenticated?('')).to eq(false)
+		end
+	end
+
 end
